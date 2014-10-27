@@ -12,6 +12,14 @@ if(Mage::getEdition() == Mage::EDITION_ENTERPRISE) {
 
 class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encryption_Abstract {
     /**
+     * Prevents infinite recursion when backwards compatibility is enabled
+     * and merchant using enterprise edition.
+     *
+     * @var bool
+     */
+    private $_infiniteRecursionLock = false;
+
+    /**
      * Convenience method to get helper instance.
      *
      * @return EW_NativePasswords_Helper_Data
@@ -124,7 +132,8 @@ class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encry
 
         //if backwards compatibility enabled, allow parent to also verify hash
         if($this->_getHelper()->allowBackwardsCompatibleVerification()) {
-            //$valid = $valid || parent::validateHash($password, $hash);
+            $this->_infiniteRecursionLock = true;
+            $valid = $valid || parent::validateHash($password, $hash);
         }
 
         return $valid;
@@ -140,6 +149,11 @@ class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encry
      */
     public function validateHashByVersion($password, $hash, $version = 1) {
         if(!$this->_getHelper()->isEnabled()) { //bail if not enabled
+            return parent::validateHashByVersion($password, $hash, $version);
+        }
+
+        if($this->_infiniteRecursionLock) { //prevent infinite recursion and call parent instead
+            $this->_infiniteRecursionLock = false; //reset lock
             return parent::validateHashByVersion($password, $hash, $version);
         }
 

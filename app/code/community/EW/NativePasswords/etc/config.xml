@@ -20,4 +20,17 @@
             </ew_nativepasswords>
         </models>
     </global>
+
+    <frontend>
+        <events>
+            <customer_customer_authenticated>
+                <observers>
+                    <enterprise_pci>
+                        <!-- for now, disable this enterprise check -->
+                        <type>disabled</type>
+                    </enterprise_pci>
+                </observers>
+            </customer_customer_authenticated>
+        </events>
+    </frontend>
 </config>

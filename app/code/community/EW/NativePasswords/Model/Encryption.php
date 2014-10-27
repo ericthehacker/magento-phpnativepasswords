@@ -3,8 +3,14 @@
 // make compat library available for 5.3.7 <= PHP version < 5.5
 require_once(Mage::getBaseDir('lib') . '/password_compat/password.php');
 
-class EW_NativePasswords_Model_Encryption extends Mage_Core_Model_Encryption
-{
+//change class signature based on Magento edition
+if(Mage::getEdition() == Mage::EDITION_ENTERPRISE) {
+    abstract class EW_NativePasswords_Model_Encryption_Abstract extends Enterprise_Pci_Model_Encryption {}
+} else {
+    abstract class EW_NativePasswords_Model_Encryption_Abstract extends Mage_Core_Model_Encryption {}
+}
+
+class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encryption_Abstract {
     /**
      * Convenience method to get helper instance.
      *
@@ -88,9 +94,10 @@ class EW_NativePasswords_Model_Encryption extends Mage_Core_Model_Encryption
      * Hash a string
      *
      * @param string $data
+     * @param $version -- can't use constant for community compatibility
      * @return string
      */
-    public function hash($data)
+    public function hash($data, $version = 1)
     {
         if(!$this->_getHelper()->isEnabled()) { //bail if not enabled
             return parent::hash($data);

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <EW_NativePasswords>
+            <version>1.0.0</version>
+        </EW_NativePasswords>
+    </modules>
+    <global>
+        <helpers>
+            <ew_nativepasswords>
+                <class>EW_NativePasswords_Helper</class>
+            </ew_nativepasswords>
+            <core>
+                <encryption_model>EW_NativePasswords_Model_Encryption</encryption_model>
+            </core>
+        </helpers>
+        <models>
+            <ew_nativepasswords>
+                <class>EW_NativePasswords_Model</class>
+            </ew_nativepasswords>
+        </models>
+    </global>
+</config>

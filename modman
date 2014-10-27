@@ -1,0 +1,3 @@
+app/code/community/EW/NativePasswords
+lib/password_compat
+app/etc/modules/EW_NativePasswords.xml

@@ -117,10 +117,17 @@ class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encry
     public function validateHash($password, $hash)
     {
         if(!$this->_getHelper()->isEnabled()) { //bail if not enabled
-            return parent::getHash($password, $hash);
+            return parent::validateHash($password, $hash);
         }
 
-        return password_verify($password, $hash);
+        $valid = password_verify($password, $hash);
+
+        //if backwards compatibility enabled, allow parent to also verify hash
+        if($this->_getHelper()->allowBackwardsCompatibleVerification()) {
+            //$valid = $valid || parent::validateHash($password, $hash);
+        }
+
+        return $valid;
     }
 
     /**
@@ -132,6 +139,10 @@ class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encry
      * @return bool
      */
     public function validateHashByVersion($password, $hash, $version = 1) {
-        return true; //@todo: reevaluate this
+        if(!$this->_getHelper()->isEnabled()) { //bail if not enabled
+            return parent::validateHashByVersion($password, $hash, $version);
+        }
+
+        return $this->validateHash($password, $hash);
     }
 }

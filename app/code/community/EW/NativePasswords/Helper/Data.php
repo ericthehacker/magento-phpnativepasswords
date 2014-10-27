@@ -4,6 +4,8 @@ class EW_NativePasswords_Helper_Data extends Mage_Core_Helper_Abstract
 {
     const MINIMUM_REQUIRED_PHP_VERSION = '5.3.7';
     const NATIVE_PHP_VERSION = '5.5.0';
+    const CONFIG_PATH_ENABLED = 'customer/password/native_passwords_enabled';
+    const CONFIG_PATH_BACKWARDS_COMPATIBLE = 'customer/password/native_passwords_backwards_compatible';
 
     /**
      * Determine if functionality *should* be used
@@ -13,7 +15,9 @@ class EW_NativePasswords_Helper_Data extends Mage_Core_Helper_Abstract
      * @return bool
      */
     public function isEnabled() {
-        //@todo: check some system config and bail if disabled
+        if(!(bool)Mage::getStoreConfig(self::CONFIG_PATH_ENABLED)) {
+            return false;
+        }
 
         if (version_compare(phpversion(), self::MINIMUM_REQUIRED_PHP_VERSION, '<')===true) {
             $exceptionMessage = sprintf(
@@ -35,5 +39,15 @@ class EW_NativePasswords_Helper_Data extends Mage_Core_Helper_Abstract
         }
 
         return true;
+    }
+
+    /**
+     * Should password hashes created by Magento
+     * still be used for verification?
+     *
+     * @return bool
+     */
+    public function allowBackwardsCompatibleVerification() {
+        return (bool)Mage::getStoreConfig(self::CONFIG_PATH_BACKWARDS_COMPATIBLE);
     }
 }

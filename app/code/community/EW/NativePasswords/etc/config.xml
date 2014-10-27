@@ -20,4 +20,13 @@
             </ew_nativepasswords>
         </models>
     </global>
+
+    <default>
+        <customer>
+            <password>
+                <native_passwords_enabled>0</native_passwords_enabled>
+                <native_passwords_backwards_compatible>1</native_passwords_backwards_compatible>
+            </password>
+        </customer>
+    </default>
 </config>

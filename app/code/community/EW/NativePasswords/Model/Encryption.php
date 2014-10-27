@@ -15,7 +15,50 @@ class EW_NativePasswords_Model_Encryption extends Mage_Core_Model_Encryption
     }
 
     /**
-     * Generate a [salted] hash.
+     * Get password hash algorithm
+     *
+     * @return int
+     */
+    protected function _getHashAlgorithm() {
+        return PASSWORD_DEFAULT; //@todo: system config to determine this?
+    }
+
+    /**
+     * Get encryption cost
+     *
+     * @return int
+     */
+    protected function _getCost() {
+        return 10; //@todo: system config
+    }
+
+    /**
+     * Auto generate salt even if salt provided?
+     *
+     * @return bool
+     */
+    protected function _autoGenerateSalt() {
+        return true; //@todo: system config
+    }
+
+    /**
+     * Convenience method to assemble options array
+     *
+     * @return array
+     */
+    protected function _getOptions() {
+        $options = array(
+            'cost' => $this->_getCost()
+        );
+
+        //don't know if salt available, so can't configure in options array yet.
+
+        return $options;
+    }
+
+    /**
+     * Generate a [salted] hash using native password methods,
+     * in enabled.
      *
      * $salt can be:
      * false - a random will be generated
@@ -31,6 +74,14 @@ class EW_NativePasswords_Model_Encryption extends Mage_Core_Model_Encryption
         if(!$this->_getHelper()->isEnabled()) { //bail if not enabled
             return parent::getHash($password, $salt);
         }
+
+        $options = $this->_getOptions();
+
+        if(!$this->_autoGenerateSalt() && !empty($salt)) {
+            $options['salt'] = $salt;
+        }
+
+        return password_hash($password, $this->_getHashAlgorithm(), $options);
     }
 
     /**
@@ -44,6 +95,8 @@ class EW_NativePasswords_Model_Encryption extends Mage_Core_Model_Encryption
         if(!$this->_getHelper()->isEnabled()) { //bail if not enabled
             return parent::hash($data);
         }
+
+        return parent::hash($data); //@todo: does this method need to be overridden at all?
     }
 
     /**
@@ -59,5 +112,7 @@ class EW_NativePasswords_Model_Encryption extends Mage_Core_Model_Encryption
         if(!$this->_getHelper()->isEnabled()) { //bail if not enabled
             return parent::getHash($password, $hash);
         }
+
+        return password_verify($password, $hash);
     }
 }

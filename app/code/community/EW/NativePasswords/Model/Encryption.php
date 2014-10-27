@@ -115,4 +115,16 @@ class EW_NativePasswords_Model_Encryption extends Mage_Core_Model_Encryption
 
         return password_verify($password, $hash);
     }
+
+    /**
+     * Enterprise compatibility method.
+     *
+     * @param $password
+     * @param $hash
+     * @param $version -- can't use enterprise constant for community compatibility
+     * @return bool
+     */
+    public function validateHashByVersion($password, $hash, $version = 1) {
+        return true; //@todo: reevaluate this
+    }
 }

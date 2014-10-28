@@ -11,6 +11,8 @@ if(Mage::getEdition() == Mage::EDITION_ENTERPRISE) {
 }
 
 class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encryption_Abstract {
+    const COST_DEFAULT = 10;
+
     /**
      * Prevents infinite recursion when backwards compatibility is enabled
      * and merchant using enterprise edition.
@@ -43,7 +45,7 @@ class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encry
      * @return int
      */
     protected function _getCost() {
-        return 10; //@todo: system config
+        return $this->_getHelper()->getConfiguredCost();
     }
 
     /**

@@ -19,6 +19,18 @@
                 <class>EW_NativePasswords_Model</class>
             </ew_nativepasswords>
         </models>
+
+        <events>
+            <model_config_data_save_before>
+                <observers>
+                    <yourmodule>
+                        <type>singleton</type>
+                        <class>ew_nativepasswords/observer</class>
+                        <method>validateEnvironment</method>
+                    </yourmodule>
+                </observers>
+            </model_config_data_save_before>
+        </events>
     </global>
 
     <default>
@@ -26,6 +38,7 @@
             <password>
                 <native_passwords_enabled>0</native_passwords_enabled>
                 <native_passwords_backwards_compatible>1</native_passwords_backwards_compatible>
+                <native_passwords_cost>10</native_passwords_cost>
             </password>
         </customer>
     </default>

@@ -54,7 +54,7 @@ class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encry
      * @return bool
      */
     protected function _autoGenerateSalt() {
-        return true; //@todo: system config
+        return $this->_getHelper()->forceNativeSalt();
     }
 
     /**

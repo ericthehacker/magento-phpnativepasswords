@@ -18,6 +18,18 @@ The module will use native PHP API for PHP versions 5.5.0 and greater, and a
 If the system does not meet the PHP requirements, the system configuration option will throw an exception
 if it is enabled in system configuration.
 
+## Installation
+
+### Modman
+
+```
+$ cd <web root>
+$ modman init # if you've never used modman on this Magento instance
+$ modman clone https://github.com/ericthehacker/magento-phpnativepasswords.git
+``
+
+Be sure to flush your cache after installation!
+
 ## Usage
 
 This module's functionality is disabled by default. To use, visit System -> Configuration -> Customers -> 

@@ -26,7 +26,7 @@ if it is enabled in system configuration.
 $ cd <web root>
 $ modman init # if you've never used modman on this Magento instance
 $ modman clone https://github.com/ericthehacker/magento-phpnativepasswords.git
-``
+```
 
 Be sure to flush your cache after installation!
 

@@ -101,6 +101,6 @@ class EW_NativePasswords_Test_Model_Encryption extends EcomDev_PHPUnit_Test_Case
 
         $valid = $encryptor->validateHash($password, $hash);
 
-        $this->assertEquals($valid, $expectation);
+        $this->assertEquals($expectation, $valid);
     }
 }

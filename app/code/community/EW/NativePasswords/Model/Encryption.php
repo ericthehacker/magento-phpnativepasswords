@@ -149,6 +149,7 @@ class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encry
         if($this->_getHelper()->allowBackwardsCompatibleVerification()) {
             $this->_infiniteRecursionLock = true;
             $valid = $valid || parent::validateHash($password, $hash);
+            $this->_infiniteRecursionLock = false; //reset lock
         }
 
         return $valid;
@@ -168,7 +169,6 @@ class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encry
         }
 
         if($this->_infiniteRecursionLock) { //prevent infinite recursion and call parent instead
-            $this->_infiniteRecursionLock = false; //reset lock
             return parent::validateHashByVersion($password, $hash, $version);
         }
 

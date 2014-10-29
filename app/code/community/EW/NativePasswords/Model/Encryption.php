@@ -45,7 +45,20 @@ class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encry
      * @return int
      */
     protected function _getCost() {
-        return $this->_getHelper()->getConfiguredCost();
+        $value = $this->_getHelper()->getConfiguredCost();
+
+        if($this->_getHelper()->validateCost($value)) {
+            return $value;
+        }
+
+        throw new EW_NativePasswords_Exception_InvalidCostException(
+            $this->_getHelper()->__(
+                'Configured cost %d is invalid. Cost must be in interval [%d,%d].',
+                $value,
+                EW_NativePasswords_Helper_Data::COST_MIN,
+                EW_NativePasswords_Helper_Data::COST_MAX
+            )
+        );
     }
 
     /**
@@ -54,7 +67,7 @@ class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encry
      * @return bool
      */
     protected function _autoGenerateSalt() {
-        return true; //@todo: system config
+        return $this->_getHelper()->forceNativeSalt();
     }
 
     /**
@@ -136,6 +149,7 @@ class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encry
         if($this->_getHelper()->allowBackwardsCompatibleVerification()) {
             $this->_infiniteRecursionLock = true;
             $valid = $valid || parent::validateHash($password, $hash);
+            $this->_infiniteRecursionLock = false; //reset lock
         }
 
         return $valid;
@@ -155,7 +169,6 @@ class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encry
         }
 
         if($this->_infiniteRecursionLock) { //prevent infinite recursion and call parent instead
-            $this->_infiniteRecursionLock = false; //reset lock
             return parent::validateHashByVersion($password, $hash, $version);
         }
 

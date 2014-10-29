@@ -74,11 +74,7 @@ class EW_NativePasswords_Helper_Data extends Mage_Core_Helper_Abstract
     public function getConfiguredCost() {
         $value = (int)Mage::getStoreConfig(self::CONFIG_PATH_COST);
 
-        if($this->validateCost($value)) {
-            return $value;
-        }
-
-        return self::COST_DEFAULT;
+        return $value;
     }
 
     /**

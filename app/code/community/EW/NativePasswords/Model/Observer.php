@@ -38,7 +38,7 @@ class EW_NativePasswords_Model_Observer
         $helper = Mage::helper('ew_nativepasswords');
 
         if(!$helper->validateCost($cost)) {
-            throw new EW_NativePasswords_Exception_IncompatibleEnvironmentException(
+            throw new EW_NativePasswords_Exception_InvalidCostException(
                 $helper->__(
                     'Invalid cost %d. Cost must be in interval [%d,%d].',
                     $cost,

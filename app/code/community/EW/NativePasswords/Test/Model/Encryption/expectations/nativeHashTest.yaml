@@ -1,2 +1,28 @@
-yourmom: $2y$10$testsalttestsalttestsOfzruMXhPY4sCW6CsBAZOq9YpZtMi9wu
-asdfqwer1: $2y$10$abcdefghijklmnopqrstuu5EM6tnOTuzHIMnjaBIudfhRvJl.AlNK
+yourmom:
+  3:
+    error: true
+  4:
+    error: false
+    hash: $2y$04$testsalttestsalttestsOVzUMZH9ACuivg6yfGSUhxmlyKgl80di
+  10:
+    error: false
+    hash: $2y$10$testsalttestsalttestsOfzruMXhPY4sCW6CsBAZOq9YpZtMi9wu
+  15:
+    error: false
+    hash: $2y$15$testsalttestsalttestsOi/8WOzHMiU0TbyHkgyKRC1lGkHPkyga
+  32:
+    error: true
+asdfqwer1:
+  3:
+    error: true
+  4:
+    error: false
+    hash: $2y$04$abcdefghijklmnopqrstuuR4TfeTVs8RFHh9nCyf5gRAGl62bFWyS
+  10:
+    error: false
+    hash: $2y$10$abcdefghijklmnopqrstuu5EM6tnOTuzHIMnjaBIudfhRvJl.AlNK
+  15:
+    error: false
+    hash: $2y$15$abcdefghijklmnopqrstuuRf8acdvKoRDPxk60ZBilmh1Jluezm3q
+  32:
+    error: true

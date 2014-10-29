@@ -3,6 +3,23 @@
 class EW_NativePasswords_Test_Model_Encryption extends EcomDev_PHPUnit_Test_Case
 {
     /**
+     * Configure helper to return mock values
+     *
+     * @param $cost
+     */
+    protected function _mockHelper($cost) {
+        $mockHelper = $this->getHelperMockBuilder('ew_nativepasswords')
+            ->setMethods(array('getConfiguredCost'))
+            ->getMock();
+
+        $mockHelper->expects($this->any())
+            ->method('getConfiguredCost')
+            ->will($this->returnValue($cost));
+
+        $this->replaceByMock('helper', 'ew_nativepasswords', $mockHelper);
+    }
+
+    /**
      * Test native password hashing
      *
      * @test
@@ -10,17 +27,27 @@ class EW_NativePasswords_Test_Model_Encryption extends EcomDev_PHPUnit_Test_Case
      * @dataProvider dataProvider
      * @loadExpectation
      */
-    public function nativeHashTest($password, $salt)
+    public function nativeHashTest($password, $salt, $cost)
     {
-        $expectation = self::expected();
+        $expectation = self::expected()->getData($password);
 
-        $expectedHash = $expectation->getData($password);
+        $expectedPair = $expectation[$cost];
+        $expectedError = (bool)$expectedPair['error'];
+        $expectedHash = isset($expectedPair['hash']) ? $expectedPair['hash'] : '';
+
+        $this->_mockHelper($cost);
 
         /* @var $encryptor EW_NativePasswords_Model_Encryption */
         $encryptor = Mage::helper('core')->getEncryptor();
 
-        $actualHash = $encryptor->getHash($password, $salt);
+        try {
+            $actualHash = $encryptor->getHash($password, $salt);
 
-        $this->assertEquals($actualHash, $expectedHash);
+            $this->assertEquals($actualHash, $expectedHash);
+        } catch(EW_NativePasswords_Exception_InvalidCostException $icex) {
+            if(!$expectedError) {
+                $this->fail('Invalid cost did not throw exception.');
+            }
+        }
     }
 }

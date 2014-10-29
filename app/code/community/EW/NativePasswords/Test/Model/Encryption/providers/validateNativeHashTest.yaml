@@ -1,0 +1,102 @@
+-
+  - yourmom
+  - $2y$04$testsalttestsalttestsOVzUMZH9ACuivg6yfGSUhxmlyKgl80di
+  - false
+  - 0
+-
+  - yourmom
+  - $2y$10$testsalttestsalttestsOfzruMXhPY4sCW6CsBAZOq9YpZtMi9wu
+  - false
+  - 1
+-
+  - yourmom
+  - $2y$15$testsalttestsalttestsOi/8WOzHMiU0TbyHkgyKRC1lGkHPkyga
+  - false
+  - 2
+-
+  - asdfqwer1
+  - $2y$04$abcdefghijklmnopqrstuuR4TfeTVs8RFHh9nCyf5gRAGl62bFWyS
+  - false
+  - 3
+-
+  - asdfqwer1
+  - $2y$10$abcdefghijklmnopqrstuu5EM6tnOTuzHIMnjaBIudfhRvJl.AlNK
+  - false
+  - 4
+-
+  - asdfqwer1
+  - $2y$15$abcdefghijklmnopqrstuuRf8acdvKoRDPxk60ZBilmh1Jluezm3q
+  - false
+  - 5
+-
+  - yourmom
+  - $2y$04$testsalttestsalttestsOVzUMZH9Agtbvg6yfGSUhxmlyKgl80di
+  - false
+  - 6
+-
+  - yourmom
+  - $2y$10$testsalttestsalttestsO5tguMXhPY4sCW6CsBAZOq9YpZtMi9wu
+  - false
+  - 7
+-
+  - yourmom
+  - $2y$15$testsalttestsalttestsOi/8WOfHMiU0TbyHksyKRC1lGkHPkyga
+  - false
+  - 8
+-
+  - asdfqwer1
+  - $2y$04$abcdefghijklmnopfgstuuR4TfeTVs8RFHh9nCyf5gRAGl62bFWyS
+  - false
+  - 9
+-
+  - asdfqwer1
+  - $2y$10$abcdefghijklmnopqrstuu6EM6tnOTuzHIMnjaBIudfhRvJl.AlNK
+  - false
+  - 10
+-
+  - asdfqwer1
+  - $2y$15$abcdefghijklmnopqrstfuRf8acdvKoRDPxk60ZBilmh1Jluezm3q
+  - false
+  - 11
+
+# backwards compatible enabled
+-
+  - asdfqwer1
+  - $2y$04$abcdefghijklmnopqrstuuR4TfeTVs8RFHh9nCyf5gRAGl62bFWyS
+  - true
+  - 12
+-
+  - asdfqwer1
+  - fcf2a186cc2da0625aee6712598e9878659f4f62c778bcd15fd55a031ce13fb4:abcdefghijklmnopqrstuv
+  - true
+  - 13
+-
+  - yourmom
+  - $2y$04$testsalttestsalttestsOVzUMZH9ACuivg6yfGSUhxmlyKgl80di
+  - true
+  - 14
+-
+  - yourmom
+  - 8651e67e4daf5c2a0773958cf20b123c17e1aef499bb427623a8df6c4dbbf33d:testsalttestsalttestsa
+  - true
+  - 15
+-
+  - asdfqwer1
+  - $2y$04$abcdefghijklasfpfgstuuR4TfeTVs8RFHh9nCyf5gRAGl62bFWyS
+  - true
+  - 16
+-
+  - asdfqwer1
+  - fcf2a186cc2da0625aee6712598e98fev59f4f62c778bcd15fd55a031ce13fb4:abcdefghijklmnopqrstuv
+  - true
+  - 17
+-
+  - yourmom
+  - $2y$04$testsalttestsalttestsOgizMZH9Agtbvg6yfGSUhxmlyKgl80di
+  - true
+  - 18
+-
+  - yourmom
+  - 8651e67e4daf5c2a0773958cf20b123c1andaef499bb427623a8df6c4dbbf33d:testsalttestsalttestsa
+  - true
+  - 19

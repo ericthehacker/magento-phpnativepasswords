@@ -14,6 +14,7 @@ class EW_NativePasswords_Helper_Data extends Mage_Core_Helper_Abstract
     const CONFIG_PATH_ENABLED = 'customer/password/native_passwords_enabled';
     const CONFIG_PATH_BACKWARDS_COMPATIBLE = 'customer/password/native_passwords_backwards_compatible';
     const CONFIG_PATH_COST = 'customer/password/native_passwords_cost';
+    const CONFIG_PATH_FORCE_AUTO_SALT = 'customer/password/native_passwords_force_auto_salt';
 
     /**
      * Check environment
@@ -33,6 +34,16 @@ class EW_NativePasswords_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function isEnabled() {
         return (bool)Mage::getStoreConfig(self::CONFIG_PATH_ENABLED);
+    }
+
+    /**
+     * Ignore any specified salt and instead always
+     * use native auto-generated salt?
+     *
+     * @return bool
+     */
+    public function forceNativeSalt() {
+        return (bool)Mage::getStoreConfig(self::CONFIG_PATH_FORCE_AUTO_SALT);
     }
 
     /**
@@ -63,11 +74,7 @@ class EW_NativePasswords_Helper_Data extends Mage_Core_Helper_Abstract
     public function getConfiguredCost() {
         $value = (int)Mage::getStoreConfig(self::CONFIG_PATH_COST);
 
-        if($this->validateCost($value)) {
-            return $value;
-        }
-
-        return self::COST_DEFAULT;
+        return $value;
     }
 
     /**

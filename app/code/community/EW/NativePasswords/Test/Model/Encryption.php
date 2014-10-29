@@ -55,4 +55,27 @@ class EW_NativePasswords_Test_Model_Encryption extends EcomDev_PHPUnit_Test_Case
             }
         }
     }
+
+    /**
+     * Test disabled mode falling back to Magento
+     *
+     * @test
+     * @dataProvider dataProvider
+     * @loadExpectation
+     * @param $password
+     * @param $salt
+     */
+    public function magentoHashTest($password, $salt) {
+        $expectation = self::expected()->getData($password);
+        $expectedHash = $expectation[$salt];
+
+        $this->_mockHelper(false, null); //cost is irrelevant
+
+        /* @var $encryptor EW_NativePasswords_Model_Encryption */
+        $encryptor = Mage::helper('core')->getEncryptor();
+
+        $actualHash = $encryptor->getHash($password, $salt);
+
+        $this->assertEquals($actualHash, $expectedHash);
+    }
 }

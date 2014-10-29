@@ -1,3 +1,2 @@
 config:
-  default/customer/password/native_passwords_enabled: 1
   default/customer/password/native_passwords_force_auto_salt: 0

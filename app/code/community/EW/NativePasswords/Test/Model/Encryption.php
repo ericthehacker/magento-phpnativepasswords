@@ -5,16 +5,21 @@ class EW_NativePasswords_Test_Model_Encryption extends EcomDev_PHPUnit_Test_Case
     /**
      * Configure helper to return mock values
      *
+     * @param $enabled
      * @param $cost
      */
-    protected function _mockHelper($cost) {
+    protected function _mockHelper($enabled, $cost) {
         $mockHelper = $this->getHelperMockBuilder('ew_nativepasswords')
-            ->setMethods(array('getConfiguredCost'))
+            ->setMethods(
+                array(
+                    'isEnabled',
+                    'getConfiguredCost'
+                )
+            )
             ->getMock();
 
-        $mockHelper->expects($this->any())
-            ->method('getConfiguredCost')
-            ->will($this->returnValue($cost));
+        $mockHelper->method('isEnabled')->will($this->returnValue($enabled));
+        $mockHelper->method('getConfiguredCost')->will($this->returnValue($cost));
 
         $this->replaceByMock('helper', 'ew_nativepasswords', $mockHelper);
     }
@@ -35,7 +40,7 @@ class EW_NativePasswords_Test_Model_Encryption extends EcomDev_PHPUnit_Test_Case
         $expectedError = (bool)$expectedPair['error'];
         $expectedHash = isset($expectedPair['hash']) ? $expectedPair['hash'] : '';
 
-        $this->_mockHelper($cost);
+        $this->_mockHelper(true, $cost);
 
         /* @var $encryptor EW_NativePasswords_Model_Encryption */
         $encryptor = Mage::helper('core')->getEncryptor();

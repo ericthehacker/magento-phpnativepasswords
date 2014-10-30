@@ -41,8 +41,6 @@ Any new customer accounts will use the native hashing API.
 
 - Use PHP Native Password Hashing: This setting fundamentally enables or disables the native password API functionality.
   *Disabled by default*.
-- Use Backwards-Compatible Hash Verification: This setting allows hash verification using Magento's implementation 
-  if the PHP API verification fails. This allows the site to continue to use old password hashes. *Enabled by default*.
 - Password Hashing Cost: Password hash cost, in the range [4-31]. See 
   [crypt() documentation](http://php.net/manual/en/function.crypt.php) for more information. *10 by default*.
 

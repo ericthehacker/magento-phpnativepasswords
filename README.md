@@ -4,8 +4,6 @@ Adds support to Magento to optionally use
 [PHP's native password hashing](http://php.net/manual/en/function.password-hash.php) functionality
 for customer and admin password hashing and validation.
 
-**WARNING**: This is a work in progress, and although I plan to finish it quickly, it is not currently well tested.
-
 ## Overview
 
 According to [PHP password hashing FAQ](http://php.net/manual/en/faq.passwords.php#faq.passwords.fasthash), the hashing 

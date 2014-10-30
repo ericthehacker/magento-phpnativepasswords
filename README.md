@@ -17,9 +17,7 @@ The module will use native PHP API for PHP versions 5.5.0 and greater, and a
 If the system does not meet the PHP requirements, the system configuration option will throw an exception
 if it is enabled in system configuration.
 
-## Installation
-
-### Modman
+## Installation via [modman](https://github.com/colinmollenhour/modman)
 
 ```
 $ cd <magento root>

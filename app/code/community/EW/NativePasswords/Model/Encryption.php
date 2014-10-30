@@ -114,22 +114,6 @@ class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encry
     }
 
     /**
-     * Hash a string
-     *
-     * @param string $data
-     * @param $version -- can't use constant for community compatibility
-     * @return string
-     */
-    public function hash($data, $version = 1)
-    {
-        if(!$this->_getHelper()->isEnabled()) { //bail if not enabled
-            return parent::hash($data);
-        }
-
-        return parent::hash($data); //@todo: does this method need to be overridden at all?
-    }
-
-    /**
      * Validate hash against hashing method (with or without salt)
      *
      * @param string $password

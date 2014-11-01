@@ -37,6 +37,7 @@ before_script:
   - cp .travis/phpunit.xml.dist "${MAGENTO_VERSION}"
   - cd "${MAGENTO_VERSION}"
   - ../modman init
+  - ../modman clone https://github.com/EcomDev/EcomDev_PHPUnit.git
   - ../modman clone https://github.com/ericthehacker/magento-phpnativepasswords.git
 script:
   - phpunit

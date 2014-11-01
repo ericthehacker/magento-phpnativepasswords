@@ -5,9 +5,7 @@ branches:
     - feature/travis-ci
 
 php:
-  - 5.3
   - 5.4
-  - 5.5
 
 env:
   #- MAGENTO_VERSION="magento-mirror-1.4.2.0" DB=mysql INSTALL_SAMPLE_DATA=yes COVERAGE=63
@@ -25,11 +23,18 @@ env:
 #      env: MAGENTO_VERSION="magento-ce-1.9.0.1" DB=mysql INSTALL_SAMPLE_DATA=no COVERAGE=65
 
 before_script:
-  - curl -s http://getcomposer.org/installer | php
-  - php composer.phar install --dev --prefer-source
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS `magento_travis`;'
-  - export N98_MAGERUN_TEST_MAGENTO_ROOT="./${MAGENTO_VERSION}"
-  - bin/n98-magerun install --magentoVersionByName="${MAGENTO_VERSION}" --installationFolder="./${MAGENTO_VERSION}" --dbHost=localhost --dbUser=root --dbPass='' --dbName="magento_travis" --installSampleData=${INSTALL_SAMPLE_DATA} --useDefaultConfigParams=yes --baseUrl="http://travis.magento.local/"
-
+#  - curl -s http://getcomposer.org/installer | php
+#  - php composer.phar install --dev --prefer-source
+#  - mysql -e 'CREATE DATABASE IF NOT EXISTS `magento_travis`;'
+#  - export N98_MAGERUN_TEST_MAGENTO_ROOT="./${MAGENTO_VERSION}"
+#  - bin/n98-magerun install --magentoVersionByName="${MAGENTO_VERSION}" --installationFolder="./${MAGENTO_VERSION}" --dbHost=localhost --dbUser=root --dbPass='' --dbName="magento_travis" --installSampleData=${INSTALL_SAMPLE_DATA} --useDefaultConfigParams=yes --baseUrl="http://travis.magento.local/"
+  - curl -o n98-magerun.phar https://raw.githubusercontent.com/netz98/n98-magerun/master/n98-magerun.phar
+  - curl -o modman https://raw.githubusercontent.com/colinmollenhour/modman/master/modman
+  - chmod +x ./n98-magerun.phar
+  - chmod +x ./modman
+  - ./n98-magerun.phar install --magentoVersionByName="${MAGENTO_VERSION}" --installationFolder="./${MAGENTO_VERSION}" --dbHost=localhost --dbUser=root --dbPass='' --dbName="magento_travis" --installSampleData=${INSTALL_SAMPLE_DATA} --useDefaultConfigParams=yes --baseUrl="http://travis.magento.local/"
+  - cd "${MAGENTO_VERSION}"
+  - ../modman init
+  - ../modman link nativepasswords ../
 script:
   - phpunit

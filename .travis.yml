@@ -5,14 +5,11 @@ branches:
     - feature/travis-ci
 
 php:
-  - 5.3
+#  - 5.3
   - 5.4
   - 5.5
 
 env:
-  - MAGENTO_VERSION="magento-mirror-1.4.2.0" DB=mysql INSTALL_SAMPLE_DATA=no COVERAGE=63
-  - MAGENTO_VERSION="magento-mirror-1.5.1.0" DB=mysql INSTALL_SAMPLE_DATA=no COVERAGE=65
-  - MAGENTO_VERSION="magento-ce-1.6.2.0" DB=mysql INSTALL_SAMPLE_DATA=no COVERAGE=65
   - MAGENTO_VERSION="magento-ce-1.7.0.2" DB=mysql INSTALL_SAMPLE_DATA=no COVERAGE=65
   - MAGENTO_VERSION="magento-ce-1.8.1.0" DB=mysql INSTALL_SAMPLE_DATA=no COVERAGE=65
   - MAGENTO_VERSION="magento-ce-1.9.0.1" DB=mysql INSTALL_SAMPLE_DATA=no COVERAGE=65

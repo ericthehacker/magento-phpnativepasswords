@@ -34,6 +34,7 @@ before_script:
   - chmod +x ./n98-magerun.phar
   - chmod +x ./modman
   - ./n98-magerun.phar install --magentoVersionByName="${MAGENTO_VERSION}" --installationFolder="./${MAGENTO_VERSION}" --dbHost=localhost --dbUser=root --dbPass='' --dbName="magento_travis" --installSampleData=${INSTALL_SAMPLE_DATA} --useDefaultConfigParams=yes --baseUrl="http://travis.magento.local/"
+  - cp .travis/phpunit.xml.dist "${MAGENTO_VERSION}"
   - cd "${MAGENTO_VERSION}"
   - ../modman init
   - ../modman clone https://github.com/ericthehacker/magento-phpnativepasswords.git

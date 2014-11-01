@@ -1,0 +1,30 @@
+<config>
+   <global>
+      <resources>
+         <default_setup>
+            <connection>
+               <dbname>magento_travis</dbname>
+            </connection>
+         </default_setup>
+      </resources>
+   </global>
+   <default>
+      <web>
+         <seo>
+            <use_rewrites>1</use_rewrites>
+         </seo>
+         <secure>
+            <base_url>http://travis.magento.local/</base_url>
+         </secure>
+         <unsecure>
+            <base_url>http://travis.magento.local/</base_url>
+         </unsecure>
+         <url>
+            <redirect_to_base>0</redirect_to_base>
+         </url>
+      </web>
+   </default>
+   <phpunit>
+      <allow_same_db>1</allow_same_db>
+   </phpunit>
+</config>

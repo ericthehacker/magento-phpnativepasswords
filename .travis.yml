@@ -35,6 +35,7 @@ before_script:
   - chmod +x ./modman
   - ./n98-magerun.phar install --magentoVersionByName="${MAGENTO_VERSION}" --installationFolder="./${MAGENTO_VERSION}" --dbHost=localhost --dbUser=root --dbPass='' --dbName="magento_travis" --installSampleData=${INSTALL_SAMPLE_DATA} --useDefaultConfigParams=yes --baseUrl="http://travis.magento.local/"
   - cp .travis/phpunit.xml.dist "${MAGENTO_VERSION}"
+  - cp .travis/local.xml.phpunit "${MAGENTO_VERSION}"/app/etc
   - cd "${MAGENTO_VERSION}"
   - ../n98-magerun.phar config:set "web/secure/base_url" "http://travis.magento.local/"
   - ../n98-magerun.phar config:set "web/unsecure/base_url" "http://travis.magento.local/"

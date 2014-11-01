@@ -35,6 +35,6 @@ before_script:
   - ./n98-magerun.phar install --magentoVersionByName="${MAGENTO_VERSION}" --installationFolder="./${MAGENTO_VERSION}" --dbHost=localhost --dbUser=root --dbPass='' --dbName="magento_travis" --installSampleData=${INSTALL_SAMPLE_DATA} --useDefaultConfigParams=yes --baseUrl="http://travis.magento.local/"
   - cd "${MAGENTO_VERSION}"
   - ../modman init
-  - ../modman link nativepasswords ../
+  - ../modman link nativepasswords ../ 
 script:
   - phpunit

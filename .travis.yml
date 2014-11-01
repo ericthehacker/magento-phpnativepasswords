@@ -1,0 +1,40 @@
+language: php
+
+branches:
+  only:
+    - develop
+    - master
+
+php:
+#  - 5.3
+  - 5.4
+  - 5.5
+
+env:
+  - MAGENTO_VERSION="magento-ce-1.7.0.2" DB=mysql INSTALL_SAMPLE_DATA=no COVERAGE=65
+  - MAGENTO_VERSION="magento-ce-1.8.1.0" DB=mysql INSTALL_SAMPLE_DATA=no COVERAGE=65
+  - MAGENTO_VERSION="magento-ce-1.9.0.1" DB=mysql INSTALL_SAMPLE_DATA=no COVERAGE=65
+
+matrix:
+#  fast_finish: true
+  exclude:
+    - php: 5.3
+      env: MAGENTO_VERSION="magento-ce-1.9.0.1" DB=mysql INSTALL_SAMPLE_DATA=no COVERAGE=65
+
+before_script:
+  - export CHECKOUT_DIR=`pwd`
+  - curl -o n98-magerun.phar https://raw.githubusercontent.com/netz98/n98-magerun/master/n98-magerun.phar
+  - curl -o modman https://raw.githubusercontent.com/colinmollenhour/modman/master/modman
+  - chmod +x ./n98-magerun.phar
+  - chmod +x ./modman
+  - ./n98-magerun.phar install --magentoVersionByName="${MAGENTO_VERSION}" --installationFolder="./${MAGENTO_VERSION}" --dbHost=localhost --dbUser=root --dbPass='' --dbName="magento_travis" --installSampleData=${INSTALL_SAMPLE_DATA} --useDefaultConfigParams=yes --baseUrl="http://travis.magento.local/"
+  - cp .travis/phpunit.xml.dist "${MAGENTO_VERSION}"
+  - cp .travis/local.xml.phpunit "${MAGENTO_VERSION}"/app/etc
+  - cd "${MAGENTO_VERSION}"
+  - ../n98-magerun.phar config:set "web/secure/base_url" "http://travis.magento.local/"
+  - ../n98-magerun.phar config:set "web/unsecure/base_url" "http://travis.magento.local/"
+  - ../modman init
+  - ../modman clone https://github.com/EcomDev/EcomDev_PHPUnit.git
+  - ../modman clone https://github.com/ericthehacker/magento-phpnativepasswords.git
+script:
+  - phpunit

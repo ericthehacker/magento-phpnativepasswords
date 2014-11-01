@@ -69,7 +69,7 @@ class EW_NativePasswords_Test_Model_Encryption extends EcomDev_PHPUnit_Test_Case
      */
     public function magentoHashTest($password, $salt) {
         $expectation = self::expected()->getData($password);
-        $expectedHash = $expectation[$salt];
+        $expectedHash = $expectation[$salt][Mage::getEdition()];
 
         $this->_mockHelper(false, true, null);
 
@@ -78,7 +78,7 @@ class EW_NativePasswords_Test_Model_Encryption extends EcomDev_PHPUnit_Test_Case
 
         $actualHash = $encryptor->getHash($password, $salt);
 
-        $this->assertEquals($actualHash, $expectedHash);
+        $this->assertEquals($expectedHash, $actualHash);
     }
 
     /**

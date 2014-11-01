@@ -49,26 +49,12 @@ reset or the module is reenabled.
   
 ## FAQ
 
-### Why do I get the error *Module "EW_NativePasswords" requires module "Enterprise_Pci".*? I really want to use this module on my Community Edition store!
+### Why is your app/etc/modules file named "Ew_NativePasswords" when the module's namespace is "EW_NativePasswords"?
 
 Magento Enterprise edition hijacks the encryption model. In order to further hijack it to use the PHP
-native API, the module must depend on the Enterprise_Pci module *when used on Enterprise Edition*.
-Until I discover a way to resolve this conflict, you will have to modify the app/etc/modules/EW_NativePasswords.xml
-file to remove the Enterprise dependency, like so:
+native API, the module must be loaded after the Enterprise_Pci module (if it exists).
+Due to an implementation detail of Magento module loading, slightly renaming the app/etc/module 
+filename accomplishes this. While this is a workaround, it avoid rewriting the core/data helper,
+so I found it to be an acceptable trade off, so I will use it until I discover a better way.
 
-```
-<?xml version="1.0"?>
-<config>
-    <modules>
-        <EW_NativePasswords>
-            <active>true</active>
-            <codePool>community</codePool>
-            <depends>
-                <Mage_Adminhtml/>
-                <Mage_Admin/>
-                <Mage_Customer/>
-            </depends>
-        </EW_NativePasswords>
-    </modules>
-</config>
-```
+See `Mage_Core_Helper_Data::getEncryptor()` and config node `global/helpers/core/encryption_model`. 

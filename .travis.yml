@@ -36,6 +36,8 @@ before_script:
   - ./n98-magerun.phar install --magentoVersionByName="${MAGENTO_VERSION}" --installationFolder="./${MAGENTO_VERSION}" --dbHost=localhost --dbUser=root --dbPass='' --dbName="magento_travis" --installSampleData=${INSTALL_SAMPLE_DATA} --useDefaultConfigParams=yes --baseUrl="http://travis.magento.local/"
   - cp .travis/phpunit.xml.dist "${MAGENTO_VERSION}"
   - cd "${MAGENTO_VERSION}"
+  - ../n98-magerun.phar config:set "web/secure/base_url" "http://travis.magento.local/"
+  - ../n98-magerun.phar config:set "web/unsecure/base_url" "http://travis.magento.local/"
   - ../modman init
   - ../modman clone https://github.com/EcomDev/EcomDev_PHPUnit.git
   - ../modman clone https://github.com/ericthehacker/magento-phpnativepasswords.git

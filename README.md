@@ -17,6 +17,11 @@ The module will use native PHP API for PHP versions 5.5.0 and greater, and a
 If the system does not meet the PHP requirements, the system configuration option will throw an exception
 if it is enabled in system configuration.
 
+## Build Status
+
+- Master: [![Master Build Status](https://api.travis-ci.org/ericthehacker/magento-phpnativepasswords.png?branch=master)](https://travis-ci.org/ericthehacker/magento-phpnativepasswords)
+- Develop: [![Develop Build Status](https://api.travis-ci.org/ericthehacker/magento-phpnativepasswords.png?branch=develop)](https://travis-ci.org/ericthehacker/magento-phpnativepasswords)
+
 ## Installation via [modman](https://github.com/colinmollenhour/modman)
 
 ```

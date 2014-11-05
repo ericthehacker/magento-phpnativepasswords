@@ -9,6 +9,7 @@ php:
 #  - 5.3
   - 5.4
   - 5.5
+  - 5.6
 
 env:
   - MAGENTO_VERSION="magento-ce-1.7.0.2" DB=mysql INSTALL_SAMPLE_DATA=no COVERAGE=65

@@ -6,6 +6,7 @@ class EW_NativePasswords_Test_Model_Encryption extends EcomDev_PHPUnit_Test_Case
      * Configure helper to return mock values
      *
      * @param $enabled
+     * @param $backwardsEnabled
      * @param $cost
      */
     protected function _mockHelper($enabled, $backwardsEnabled, $cost) {
@@ -33,6 +34,9 @@ class EW_NativePasswords_Test_Model_Encryption extends EcomDev_PHPUnit_Test_Case
      * @loadFixture
      * @dataProvider dataProvider
      * @loadExpectation
+     * @param $password
+     * @param $salt
+     * @param $cost
      */
     public function nativeHashTest($password, $salt, $cost)
     {
@@ -110,6 +114,10 @@ class EW_NativePasswords_Test_Model_Encryption extends EcomDev_PHPUnit_Test_Case
      * @test
      * @dataProvider dataProvider
      * @loadExpectation
+     * @param $controller
+     * @param $action
+     * @param $salt
+     * @param $expectationIndex
      */
     public function adminSecureUrlsTest($controller, $action, $salt, $expectationIndex) {
         $urlModel = Mage::getModel('adminhtml/url');

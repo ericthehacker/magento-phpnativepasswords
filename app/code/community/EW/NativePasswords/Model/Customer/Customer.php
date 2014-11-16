@@ -34,7 +34,11 @@ class EW_NativePasswords_Model_Customer_Customer extends Mage_Customer_Model_Cus
             //see if needs rehash
 
             $hash = $this->getPasswordHash();
-            $needsRehash = password_needs_rehash($hash, PASSWORD_BCRYPT);
+            $needsRehash = password_needs_rehash(
+                $hash,
+                PASSWORD_BCRYPT,
+                Mage::getModel('ew_nativepasswords/encryption')->getOptions()
+            );
 
             if($needsRehash) {
                 $this->rehashPassword($password);

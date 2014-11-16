@@ -77,7 +77,7 @@ class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encry
      *
      * @return array
      */
-    protected function _getOptions() {
+    public function getOptions() {
         $options = array(
             'cost' => $this->_getCost()
         );
@@ -118,7 +118,7 @@ class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encry
             return parent::getHash($password, $salt);
         }
 
-        $options = $this->_getOptions();
+        $options = $this->getOptions();
 
         if(!$salt) { // calling method intended for no salt to apply -- don't add one.
             $options['salt'] = self::CONSTANT_SALT;

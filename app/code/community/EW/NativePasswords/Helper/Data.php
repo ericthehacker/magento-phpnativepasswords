@@ -79,6 +79,15 @@ class EW_NativePasswords_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * Should legacy algorithm hashed passwords be rehashed?
+     *
+     * @return bool
+     */
+    public function rehashLegacyPasswords() {
+        return (bool)Mage::getStoreConfig(self::CONFIG_PATH_REHASH_ENABLED);
+    }
+
+    /**
      * Get optimal cost for current machine.
      * Taken from: http://php.net/manual/en/function.password-hash.php#example-923
      *

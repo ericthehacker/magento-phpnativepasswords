@@ -24,6 +24,12 @@
                     <url>EW_NativePasswords_Model_Adminhtml_Url</url>
                 </rewrite>
             </adminhtml>
+
+            <customer>
+                <rewrite>
+                    <customer>EW_NativePasswords_Model_Customer_Customer</customer>
+                </rewrite>
+            </customer>
         </models>
 
         <events>

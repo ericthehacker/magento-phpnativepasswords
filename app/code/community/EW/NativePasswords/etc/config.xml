@@ -18,6 +18,12 @@
             <ew_nativepasswords>
                 <class>EW_NativePasswords_Model</class>
             </ew_nativepasswords>
+
+            <adminhtml>
+                <rewrite>
+                    <url>EW_NativePasswords_Model_Adminhtml_Url</url>
+                </rewrite>
+            </adminhtml>
         </models>
 
         <events>

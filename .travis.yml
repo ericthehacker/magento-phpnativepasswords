@@ -2,7 +2,6 @@ language: php
 
 branches:
   only:
-    - develop
     - master
 
 php:

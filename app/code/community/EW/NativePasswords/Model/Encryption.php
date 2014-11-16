@@ -88,6 +88,18 @@ class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encry
     }
 
     /**
+     * Hash using fast (unsecure for passwords) algorithm.
+     * Should only be used for non-mission-critical applications.
+     *
+     * @param string $value
+     * @param bool $salt
+     * @return string
+     */
+    public function fastHash($value, $salt = false) {
+        return parent::getHash($value, $salt);
+    }
+
+    /**
      * Generate a [salted] hash using native password methods,
      * in enabled.
      *

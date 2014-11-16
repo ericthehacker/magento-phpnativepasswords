@@ -40,6 +40,7 @@
                 <native_passwords_backwards_compatible>1</native_passwords_backwards_compatible>
                 <native_passwords_cost>10</native_passwords_cost>
                 <native_passwords_force_auto_salt>1</native_passwords_force_auto_salt>
+                <native_passwords_rehash_enabled>1</native_passwords_rehash_enabled>
             </password>
         </customer>
     </default>

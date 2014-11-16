@@ -103,4 +103,39 @@ class EW_NativePasswords_Test_Model_Encryption extends EcomDev_PHPUnit_Test_Case
 
         $this->assertEquals($expectation, $valid);
     }
+
+    /**
+     * Admin secure URLs support
+     *
+     * @test
+     * @dataProvider dataProvider
+     * @loadExpectation
+     */
+    public function adminSecureUrlsTest($controller, $action, $salt, $expectationIndex) {
+        $urlModel = Mage::getModel('adminhtml/url');
+
+        $this->assertInstanceOf('EW_NativePasswords_Model_Adminhtml_Url', $urlModel);
+
+        //enable native hash
+        $this->_mockHelper(true, true, 10);
+
+        //rig core/session->getFormKey() to use $salt
+        $mockSession = $this->getModelMockBuilder('core/session')
+            ->disableOriginalConstructor()
+            ->setMethods(
+                array(
+                    'getFormKey'
+                )
+            )
+            ->getMock();
+        $mockSession->method('getFormKey')->will($this->returnValue($salt));
+        $this->replaceByMock('model', 'core/session', $mockSession);
+
+        $expectation = self::expected()->getData($expectationIndex);
+        $expectedHash = $expectation[Mage::getEdition()];
+
+        $hash = $urlModel->getSecretKey($controller, $action);
+
+        $this->assertEquals($expectedHash, $hash);
+    }
 }

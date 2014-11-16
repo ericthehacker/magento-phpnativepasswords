@@ -12,6 +12,8 @@ if(Mage::getEdition() == Mage::EDITION_ENTERPRISE) {
 
 class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encryption_Abstract {
     const COST_DEFAULT = 10;
+    /** This salt is used when a constant salt is needed (eg, admin url secure key) */
+    const CONSTANT_SALT = 'ew_nativepasswords_constant_salt';
 
     /**
      * Prevents infinite recursion when backwards compatibility is enabled
@@ -106,9 +108,11 @@ class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encry
 
         $options = $this->_getOptions();
 
-        if(!$this->_autoGenerateSalt() && !empty($salt)) {
+        if(!$salt) { // calling method intended for no salt to apply -- don't add one.
+            $options['salt'] = self::CONSTANT_SALT;
+        } else if(!$this->_autoGenerateSalt()) { //some salt was supplied, and config allows
             $options['salt'] = $salt;
-        }
+        } // else, ignore supplied salt and auto gen using native methods
 
         return password_hash($password, $this->_getHashAlgorithm(), $options);
     }

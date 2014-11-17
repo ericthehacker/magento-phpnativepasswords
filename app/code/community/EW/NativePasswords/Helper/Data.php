@@ -15,6 +15,7 @@ class EW_NativePasswords_Helper_Data extends Mage_Core_Helper_Abstract
     const CONFIG_PATH_BACKWARDS_COMPATIBLE = 'customer/password/native_passwords_backwards_compatible';
     const CONFIG_PATH_COST = 'customer/password/native_passwords_cost';
     const CONFIG_PATH_FORCE_AUTO_SALT = 'customer/password/native_passwords_force_auto_salt';
+    const CONFIG_PATH_REHASH_ENABLED = 'customer/password/native_passwords_rehash_enabled';
 
     /**
      * Check environment
@@ -75,6 +76,15 @@ class EW_NativePasswords_Helper_Data extends Mage_Core_Helper_Abstract
         $value = (int)Mage::getStoreConfig(self::CONFIG_PATH_COST);
 
         return $value;
+    }
+
+    /**
+     * Should legacy algorithm hashed passwords be rehashed?
+     *
+     * @return bool
+     */
+    public function rehashLegacyPasswords() {
+        return (bool)Mage::getStoreConfig(self::CONFIG_PATH_REHASH_ENABLED);
     }
 
     /**

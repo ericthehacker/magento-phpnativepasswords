@@ -10,11 +10,11 @@ class EW_NativePasswords_Test_Model_Customer_Customer extends EcomDev_PHPUnit_Te
      * @dataProvider dataProvider
      * @loadExpectation
      * @param $password
-     * @param $originalPasswordHash
+     * @param $originalPasswordHashArray
      * @param $testHashSalt
      * @param $expectationIndex
      */
-    public function customerPasswordRehashTest($password, $originalPasswordHash, $testHashSalt, $expectationIndex) {
+    public function customerPasswordRehashTest($password, $originalPasswordHashArray, $testHashSalt, $expectationIndex) {
         //setup
         //rig customer model to disable save functionality
         $mockCustomer = $this->getModelMockBuilder('customer/customer')
@@ -29,9 +29,10 @@ class EW_NativePasswords_Test_Model_Customer_Customer extends EcomDev_PHPUnit_Te
         $mockCustomer->method('getRehashSalt')->will($this->returnValue($testHashSalt));
         $this->replaceByMock('model', 'customer/customer', $mockCustomer);
 
-        //get expectations
+        //get expectations and provider vars
         $expectation = self::expected()->getData($expectationIndex);
         $needsRehash = (bool)$expectation['needsRehash'];
+        $originalPasswordHash = $originalPasswordHashArray[Mage::getEdition()];
 
         //configure customer model
         /* @var $customer EW_NativePasswords_Model_Customer_Customer */

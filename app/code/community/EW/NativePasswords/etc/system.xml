@@ -38,6 +38,23 @@
                                 <native_passwords_enabled>1</native_passwords_enabled>
                             </depends>
                         </native_passwords_cost>
+                        <native_passwords_rehash_enabled translate="label comment">
+                            <label>Rehash Legacy Passwords</label>
+                            <comment><![CDATA[
+                                When a customer or admin successfully authenticates using a legacy
+                                hash algorithm, rehash using PHP native API.
+                            ]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <config_path>customer/password/native_passwords_rehash_enabled</config_path>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <native_passwords_enabled>1</native_passwords_enabled>
+                            </depends>
+                        </native_passwords_rehash_enabled>
                     </fields>
                 </password>
             </groups>

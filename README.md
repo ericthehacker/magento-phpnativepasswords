@@ -45,6 +45,9 @@ Any new customer or admin accounts will use the native hashing API.
   *Disabled by default*.
 - Password Hashing Cost: Password hash cost, in the range [4-31]. See 
   [crypt() documentation](http://php.net/manual/en/function.crypt.php) for more information. *10 by default*.
+- Rehash Legacy Passwords: If set to yes, customer passwords hashed using legacy algorithms will be rehashed using 
+  PHP native API after successful authentication. For stores migrating to more secure password storage, this
+  is essential. *Disabled by default for now, will soon be enabled by default*. 
 
 ## Caveat
 

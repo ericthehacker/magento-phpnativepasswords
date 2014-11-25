@@ -4,23 +4,18 @@ branches:
   only:
     - develop
     - master
+    - feature/travis
 
 php:
 #  - 5.3
-  - 5.4
-  - 5.5
+#  - 5.4
+#  - 5.5
   - 5.6
 
 env:
-  - MAGENTO_VERSION="magento-ce-1.7.0.2" DB=mysql INSTALL_SAMPLE_DATA=no COVERAGE=65
-  - MAGENTO_VERSION="magento-ce-1.8.1.0" DB=mysql INSTALL_SAMPLE_DATA=no COVERAGE=65
+#  - MAGENTO_VERSION="magento-ce-1.7.0.2" DB=mysql INSTALL_SAMPLE_DATA=no COVERAGE=65
+#  - MAGENTO_VERSION="magento-ce-1.8.1.0" DB=mysql INSTALL_SAMPLE_DATA=no COVERAGE=65
   - MAGENTO_VERSION="magento-ce-1.9.0.1" DB=mysql INSTALL_SAMPLE_DATA=no COVERAGE=65
-
-matrix:
-#  fast_finish: true
-  exclude:
-    - php: 5.3
-      env: MAGENTO_VERSION="magento-ce-1.9.0.1" DB=mysql INSTALL_SAMPLE_DATA=no COVERAGE=65
 
 before_script:
   - export CHECKOUT_DIR=`pwd`
@@ -36,6 +31,7 @@ before_script:
   - ../n98-magerun.phar config:set "web/unsecure/base_url" "http://travis.magento.local/"
   - ../modman init
   - ../modman clone https://github.com/EcomDev/EcomDev_PHPUnit.git
-  - ../modman clone https://github.com/ericthehacker/magento-phpnativepasswords.git
+  - ../modman clone https://github.com/ericthehacker/magento-phpnativepasswords.git --branch=${TRAVIS_BRANCH}
 script:
-  - phpunit
+  - phpunit --coverage-clover build/logs/clover.xml
+  - CODECLIMATE_REPO_TOKEN=3b6d539c7754b07778be9cd92db65dc713bcb5d0ef63094795f657f14e2498b1 ../vendor/bin/test-reporter

@@ -19,8 +19,9 @@ if it is enabled in system configuration.
 
 ## Build Status
 
-- Master: [![Master Build Status](https://api.travis-ci.org/ericthehacker/magento-phpnativepasswords.png?branch=master)](https://travis-ci.org/ericthehacker/magento-phpnativepasswords)
-- Develop: [![Develop Build Status](https://api.travis-ci.org/ericthehacker/magento-phpnativepasswords.png?branch=develop)](https://travis-ci.org/ericthehacker/magento-phpnativepasswords)
+- Master: [![Master Build Status](https://api.travis-ci.org/ericthehacker/magento-phpnativepasswords.svg?branch=master)](https://travis-ci.org/ericthehacker/magento-phpnativepasswords)
+- Develop: [![Develop Build Status](https://api.travis-ci.org/ericthehacker/magento-phpnativepasswords.svg?branch=develop)](https://travis-ci.org/ericthehacker/magento-phpnativepasswords)
+- Code Climate Grade: [![Code Climate Grade](https://codeclimate.com/github/ericthehacker/magento-phpnativepasswords/badges/gpa.svg)](https://codeclimate.com/github/ericthehacker/magento-phpnativepasswords)
 
 ## Installation via [modman](https://github.com/colinmollenhour/modman)
 

@@ -18,7 +18,7 @@ env:
   - MAGENTO_VERSION="magento-ce-1.9.0.1" DB=mysql INSTALL_SAMPLE_DATA=no COVERAGE=65
 
 before_script:
-  - export CHECKOUT_DIR=`pwd`
+  - composer install --dev
   - curl -o n98-magerun.phar https://raw.githubusercontent.com/netz98/n98-magerun/master/n98-magerun.phar
   - curl -o modman https://raw.githubusercontent.com/colinmollenhour/modman/master/modman
   - chmod +x ./n98-magerun.phar

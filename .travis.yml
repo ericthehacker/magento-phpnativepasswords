@@ -34,4 +34,6 @@ before_script:
   - ../modman clone https://github.com/ericthehacker/magento-phpnativepasswords.git --branch=${TRAVIS_BRANCH}
 script:
   - phpunit --coverage-clover build/logs/clover.xml
-  - CODECLIMATE_REPO_TOKEN=3b6d539c7754b07778be9cd92db65dc713bcb5d0ef63094795f657f14e2498b1 ../vendor/bin/test-reporter
+after_script:
+  - CODECLIMATE_REPO_TOKEN="3b6d539c7754b07778be9cd92db65dc713bcb5d0ef63094795f657f14e2498b1" ../vendor/bin/test-reporter --stdout > codeclimate.json
+  - curl -X POST -d @codeclimate.json -H 'Content-Type: application/json' -H 'User-Agent: Code Climate (PHP Test Reporter v0.1.1)' https://codeclimate.com/test_reports

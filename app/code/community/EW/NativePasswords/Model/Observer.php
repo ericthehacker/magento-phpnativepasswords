@@ -71,7 +71,14 @@ class EW_NativePasswords_Model_Observer
     public function validateEnvironment(Varien_Event_Observer $observer) {
         $groups = $observer->getObject()->getGroups();
 
-        $enabled = (bool)$groups['password']['fields']['native_passwords_enabled']['value'];
+        $enabled = false;
+
+        if(isset($groups['password'])
+            && isset($groups['password']['fields'])
+            && isset($groups['password']['fields']['native_passwords_enabled'])
+            && isset($groups['password']['fields']['native_passwords_enabled']['value'])) {
+            $enabled = (bool)$groups['password']['fields']['native_passwords_enabled']['value'];
+        }
 
         if(!$enabled) {
             return; //nothing to do here

@@ -8,10 +8,10 @@
                         <native_passwords_enabled translate="label comment">
                             <label>Use PHP Native Password Hashing</label>
                             <comment><![CDATA[
-                                If set to Yes,
+                                <strong>You must set this to Yes</strong> to enable
                                 <a href="http://php.net/manual/en/faq.passwords.php#faq.passwords.bestpractice">
                                 PHP native password hashing and verification</a>
-                                functionality will be used instead of Magento's hashing implementation.
+                                functionality instead of Magento's hashing implementation.
                             ]]></comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
@@ -21,15 +21,17 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </native_passwords_enabled>
-                        <native_passwords_cost translate="label comment">
-                            <label>Password Hashing Cost</label>
+                        <native_passwords_rehash_enabled translate="label comment">
+                            <label>Rehash Legacy Passwords</label>
                             <comment><![CDATA[
-                                Password hash cost, in the range [4-31]. See
-                                <a href="http://php.net/manual/en/function.crypt.php">crypt() documentation</a>
-                                for more information.
+                                When a customer or admin successfully authenticates using a legacy
+                                hash algorithm, rehash using PHP native API. It is strongly recommended to
+                                set this to Yes to retroactively update past customer and admin password
+                                hash security.
                             ]]></comment>
-                            <frontend_type>text</frontend_type>
-                            <config_path>customer/password/native_passwords_cost</config_path>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <config_path>customer/password/native_passwords_rehash_enabled</config_path>
                             <sort_order>120</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -37,16 +39,16 @@
                             <depends>
                                 <native_passwords_enabled>1</native_passwords_enabled>
                             </depends>
-                        </native_passwords_cost>
-                        <native_passwords_rehash_enabled translate="label comment">
-                            <label>Rehash Legacy Passwords</label>
+                        </native_passwords_rehash_enabled>
+                        <native_passwords_cost translate="label comment">
+                            <label>Password Hashing Cost</label>
                             <comment><![CDATA[
-                                When a customer or admin successfully authenticates using a legacy
-                                hash algorithm, rehash using PHP native API.
+                                Advanced: Password hash cost, in the range [4-31]. See
+                                <a href="http://php.net/manual/en/function.crypt.php">crypt() documentation</a>
+                                for more information. Most merchants should use the default value of 10.
                             ]]></comment>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <config_path>customer/password/native_passwords_rehash_enabled</config_path>
+                            <frontend_type>text</frontend_type>
+                            <config_path>customer/password/native_passwords_cost</config_path>
                             <sort_order>140</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -54,7 +56,7 @@
                             <depends>
                                 <native_passwords_enabled>1</native_passwords_enabled>
                             </depends>
-                        </native_passwords_rehash_enabled>
+                        </native_passwords_cost>
                     </fields>
                 </password>
             </groups>

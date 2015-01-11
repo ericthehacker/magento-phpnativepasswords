@@ -32,6 +32,12 @@
             </customer>
         </models>
 
+        <blocks>
+            <ew_nativepasswords>
+                <class>EW_NativePasswords_Block</class>
+            </ew_nativepasswords>
+        </blocks>
+
         <events>
             <model_config_data_save_before>
                 <observers>
@@ -44,6 +50,16 @@
             </model_config_data_save_before>
         </events>
     </global>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <adminnotification>
+                    <file>ew/nativepasswords.xml</file>
+                </adminnotification>
+            </updates>
+        </layout>
+    </adminhtml>
 
     <default>
         <customer>

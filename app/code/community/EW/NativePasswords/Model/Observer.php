@@ -33,7 +33,7 @@ class EW_NativePasswords_Model_Observer
      * Validate cost and throw exception if invalid
      *
      * @param $cost
-     * @throws EW_NativePasswords_Exception_IncompatibleEnvironmentException
+     * @throws EW_NativePasswords_Exception_InvalidCostException
      */
     protected function _validateCost($cost) {
         /* @var $helper EW_NativePasswords_Helper_Data */

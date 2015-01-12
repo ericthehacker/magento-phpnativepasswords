@@ -1,7 +1,7 @@
 <?php
 
 // make compat library available for 5.3.7 <= PHP version < 5.5
-require_once(Mage::getBaseDir('lib') . '/password_compat/password.php');
+require_once(Mage::getBaseDir('lib') . DS . 'password_compat'. DS .'password.php');
 
 class EW_NativePasswords_Helper_Data extends Mage_Core_Helper_Abstract
 {

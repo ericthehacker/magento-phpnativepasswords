@@ -30,6 +30,11 @@ class EW_NativePasswords_Model_Customer_Customer extends Mage_Customer_Model_Cus
         $this->save();
     }
 
+    /**
+     * Determines if password hash is insufficient and needs rehash
+     *
+     * @return bool
+     */
     public function passwordNeedsRehash() {
         /* @var $helper EW_NativePasswords_Helper_Data */
         $helper = Mage::helper('ew_nativepasswords');

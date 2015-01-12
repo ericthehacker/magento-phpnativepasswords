@@ -93,6 +93,7 @@ class EW_NativePasswords_Test_Model_Encryption extends EcomDev_PHPUnit_Test_Case
      * @loadExpectation
      * @param $password
      * @param $hash
+     * @param $backwardsAllowed
      * @param $expectationIndex
      */
     public function validateNativeHashTest($password, $hash, $backwardsAllowed, $expectationIndex) {

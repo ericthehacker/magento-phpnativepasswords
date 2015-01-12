@@ -1,0 +1,13 @@
+<?php
+    /* @var $this EW_NativePasswords_Block_Adminhtml_Notification_Enabled */
+?>
+
+<?php if ($this->isShow()): ?>
+    <div class="notification-global notification-global-notice">
+        <span class="critical">
+            <?php echo Mage::helper('ew_nativepasswords')->getNotEnabledMessage(); ?>
+        </span>
+    </div>
+
+    <?php Mage::register(EW_NativePasswords_Block_Adminhtml_Notification_Enabled::MESSAGE_SHOWN_CANARY_REGISTRY_KEY, true); ?>
+<?php endif; ?>

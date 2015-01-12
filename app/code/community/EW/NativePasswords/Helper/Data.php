@@ -1,7 +1,7 @@
 <?php
 
 // make compat library available for 5.3.7 <= PHP version < 5.5
-require_once(Mage::getBaseDir('lib') . '/password_compat/password.php');
+require_once(Mage::getBaseDir('lib') . DS . 'password_compat'. DS .'password.php');
 
 class EW_NativePasswords_Helper_Data extends Mage_Core_Helper_Abstract
 {
@@ -105,5 +105,18 @@ class EW_NativePasswords_Helper_Data extends Mage_Core_Helper_Abstract
         } while (($end - $start) < $timeTarget);
 
         return $cost;
+    }
+
+    /**
+     * Get message for admin when installed but not enabled.
+     *
+     * @return string
+     */
+    public function getNotEnabledMessage() {
+        return $this->__(
+            'You have installed the PHP native passwords API module, but have not enabled its functionality. ' .
+            'It is strongly recommended to enable this value in your Magento <a href="%s">customer configuration</a>, in the Password Options section.',
+            Mage::getUrl('adminhtml/system_config/edit', array('section'=>'customer'))
+        );
     }
 }

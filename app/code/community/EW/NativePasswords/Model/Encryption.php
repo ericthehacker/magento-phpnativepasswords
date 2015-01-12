@@ -1,7 +1,7 @@
 <?php
 
 // make compat library available for 5.3.7 <= PHP version < 5.5
-require_once(Mage::getBaseDir('lib') . '/password_compat/password.php');
+require_once(Mage::getBaseDir('lib') . DS . 'password_compat'. DS .'password.php');
 
 //change class signature based on Magento edition
 if(Mage::getEdition() == Mage::EDITION_ENTERPRISE) {
@@ -43,8 +43,8 @@ class EW_NativePasswords_Model_Encryption extends EW_NativePasswords_Model_Encry
 
     /**
      * Get encryption cost
-     *
      * @return int
+     * @throws EW_NativePasswords_Exception_InvalidCostException
      */
     protected function _getCost() {
         $value = $this->_getHelper()->getConfiguredCost();

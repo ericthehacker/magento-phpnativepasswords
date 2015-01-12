@@ -32,18 +32,46 @@
             </customer>
         </models>
 
+        <blocks>
+            <ew_nativepasswords>
+                <class>EW_NativePasswords_Block</class>
+            </ew_nativepasswords>
+        </blocks>
+
         <events>
             <model_config_data_save_before>
                 <observers>
-                    <yourmodule>
+                    <ew_nativepasswords>
                         <type>singleton</type>
                         <class>ew_nativepasswords/observer</class>
                         <method>validateEnvironment</method>
-                    </yourmodule>
+                    </ew_nativepasswords>
                 </observers>
             </model_config_data_save_before>
         </events>
     </global>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <adminnotification>
+                    <file>ew/nativepasswords.xml</file>
+                </adminnotification>
+            </updates>
+        </layout>
+
+        <events>
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <ew_nativepasswords>
+                        <type>singleton</type>
+                        <class>ew_nativepasswords/observer</class>
+                        <method>addNotEnabledWarning</method>
+                    </ew_nativepasswords>
+                </observers>
+            </core_block_abstract_to_html_after>
+        </events>
+    </adminhtml>
 
     <default>
         <customer>

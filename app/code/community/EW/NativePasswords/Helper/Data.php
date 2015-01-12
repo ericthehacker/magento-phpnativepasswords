@@ -106,4 +106,17 @@ class EW_NativePasswords_Helper_Data extends Mage_Core_Helper_Abstract
 
         return $cost;
     }
+
+    /**
+     * Get message for admin when installed but not enabled.
+     *
+     * @return string
+     */
+    public function getNotEnabledMessage() {
+        return $this->__(
+            'You have installed the PHP native passwords API module, but have not enabled its functionality. ' .
+            'It is strongly recommended to enable this value in your Magento <a href="%s">customer configuration</a>, in the Password Options section.',
+            Mage::getUrl('adminhtml/system_config/edit', array('section'=>'customer'))
+        );
+    }
 }

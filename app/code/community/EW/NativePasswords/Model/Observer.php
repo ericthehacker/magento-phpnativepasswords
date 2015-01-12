@@ -2,6 +2,8 @@
 
 class EW_NativePasswords_Model_Observer
 {
+    const ADMIN_NOTIFICATIONS_BLOCK_NAME = 'notifications';
+
     /**
      * Validate environment and throw exception if not compatible
      *
@@ -95,5 +97,51 @@ class EW_NativePasswords_Model_Observer
         if($oldCost != $cost) {
             $this->_validateCost($cost);
         }
+    }
+
+    /**
+     * If template symlinks are disabled and this module is installed but not enabled
+     * then add session notification in addition to template notification,
+     * as template notification may not be seen if module installed via modman.
+     * Observes: core_block_abstract_to_html_after
+     *
+     * @param Varien_Event_Observer $observer
+     */
+    public function addNotEnabledWarning(Varien_Event_Observer $observer) {
+        /* @var $block Mage_Core_Block_Abstract */
+        $block = $observer->getBlock();
+        /* @var $helper EW_NativePasswords_Helper_Data */
+        $helper = Mage::helper('ew_nativepasswords');
+
+        if($block->getNameInLayout() != self::ADMIN_NOTIFICATIONS_BLOCK_NAME) {
+            return; //not interested in this block
+        }
+
+        if($helper->isEnabled()) {
+            return; //module functionality enabled -- no concerns.
+        }
+
+        if(Mage::registry(EW_NativePasswords_Block_Adminhtml_Notification_Enabled::MESSAGE_SHOWN_CANARY_REGISTRY_KEY)) {
+            return; //message successfully shown via template notification
+        }
+
+        //module is installed (or this method wouldn't exist), but functionality is disabled,
+        //and template symlinks are disabled.
+        //fall back to session notification.
+
+        $message = $helper->getNotEnabledMessage();
+
+        if(!Mage::getStoreConfig(Mage_Core_Block_Template::XML_PATH_TEMPLATE_ALLOW_SYMLINK)) {
+            //add message about template symlinks
+            $message .= "<br /><br />" . //line break
+                $helper->__(
+                'Additionally, template symlinks are disabled. It is required to enable these for modules installed via modman. ' .
+                'Please visit the Developer -> Template Settings section of '.
+                '<a href="%s">system configuration</a> and set Allow Symlinks to Yes.',
+                    Mage::getUrl('adminhtml/system_config/edit', array('section'=>'dev'))
+            );
+        }
+
+        Mage::getSingleton('adminhtml/session')->addWarning($message);
     }
 }

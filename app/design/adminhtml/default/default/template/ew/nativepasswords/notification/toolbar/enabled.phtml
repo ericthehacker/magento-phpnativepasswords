@@ -5,13 +5,9 @@
 <?php if ($this->isShow()): ?>
     <div class="notification-global notification-global-notice">
         <span class="critical">
-            <?php
-                echo $this->__(
-                    'You have installed the PHP native passwords API module, but have not enabled its functionality. ' .
-                    'It is strongly recommended to enable this value in your Magento <a href="%s">customer configuration</a>, in the Password Options section.',
-                    $this->getUrl('adminhtml/system_config/edit', array('section'=>'customer'))
-                );
-            ?>
+            <?php echo Mage::helper('ew_nativepasswords')->getNotEnabledMessage(); ?>
         </span>
     </div>
+
+    <?php Mage::register(EW_NativePasswords_Block_Adminhtml_Notification_Enabled::MESSAGE_SHOWN_CANARY_REGISTRY_KEY, true); ?>
 <?php endif; ?>

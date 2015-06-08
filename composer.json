@@ -1,5 +1,5 @@
 {
-    "name": "ericthehacker/magento-phpnativepasswords",
+    "name": "peterjaap/magento-phpnativepasswords",
     "type": "magento-module",
     "description": "Adds support to Magento to optionally use PHP's native password hashing functionality.",
     "repositories": [

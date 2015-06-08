@@ -5,7 +5,7 @@
     "repositories": [
         {
             "type": "git",
-            "url":  "https://github.com/ericthehacker/magento-phpnativepasswords.git"
+            "url":  "https://github.com/peterjaap/magento-phpnativepasswords.git"
         }
     ],
     "require": {

@@ -1,7 +1,7 @@
-app/code/community/EW/NativePasswords
-app/design/adminhtml/default/default/layout/ew/nativepasswords.xml
-app/design/adminhtml/default/default/template/ew/nativepasswords
-lib/password_compat
+app/code/community/EW/NativePasswords app/code/community/EW/NativePasswords
+app/design/adminhtml/default/default/layout/ew/nativepasswords.xml app/design/adminhtml/default/default/layout/ew/nativepasswords.xml
+app/design/adminhtml/default/default/template/ew/nativepasswords app/design/adminhtml/default/default/template/ew/nativepasswords
+lib/password_compat lib/password_compat
 
 # NOTE: "Ew" not upper case is workaround to load after Enterprise_Pci :(
-app/etc/modules/Ew_NativePasswords.xml
+app/etc/modules/Ew_NativePasswords.xml app/etc/modules/Ew_NativePasswords.xml
